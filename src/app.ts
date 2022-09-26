@@ -48,6 +48,9 @@ class App {
 
   private async connectToDatabase() {
     try {
+      // Simulate delayed connection to remote db
+      await new Promise<void>(resolve => setTimeout(() => resolve(), 1000));
+
       DI.orm = await MikroORM.init(dbOptions);
       DI.em = DI.orm.em.fork();
       DI.userRepository = DI.orm.em.fork().getRepository(UserEntity);
